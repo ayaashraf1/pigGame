@@ -11,8 +11,8 @@ This version of Pig Game features two active players competing to reach a total 
 3. **The Roll-1 Penalty (Special Twist):**
    - If a player rolls a **1**, they lose **all** points (their entire Total Score resets to 0, along with their tentative Turn Score).
    - All of those lost points (Total Score + active Turn Score) are immediately transferred and added to the opponent's Total Score!
-   - The turn then passes immediately to the opponent.
-4. **Winning:** The first player to score **100** or more total points wins!
+   - If transferring these points brings the opponent's score to **100** or more, the opponent wins immediately. Otherwise, the turn passes to them.
+4. **Winning:** The first player to reach or exceed **100** total points (either by holding points or through an automatic point transfer when the opponent rolls a 1) wins the game!
 
 ---
 
