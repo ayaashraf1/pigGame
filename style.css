@@ -304,10 +304,6 @@ body {
   color: #444;
   line-height: 1.6;
 }
-  font-size: 0.95rem;
-  color: #444;
-  line-height: 1.6;
-}
 
 .instructions h3 {
   font-size: 1.1rem;
@@ -321,6 +317,95 @@ body {
 
 .instructions li {
   margin-bottom: 6px;
+}
+
+/* Winner Modal Custom Styles */
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+}
+
+.modal.hidden {
+  display: none !important;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.modal-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(8px);
+}
+
+.modal-content {
+  position: relative;
+  background: white;
+  padding: 40px;
+  border-radius: 20px;
+  box-shadow: 0 20px 50px rgba(0,0,0,0.3);
+  text-align: center;
+  z-index: 101;
+  max-width: 450px;
+  width: 90%;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  animation: modalPop 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+@keyframes modalPop {
+  0% { transform: scale(0.7); opacity: 0; }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+.confetti {
+  font-size: 3.5rem;
+  display: block;
+  margin-bottom: 15px;
+  animation: rotateConfetti 1s infinite alternate ease-in-out;
+}
+
+@keyframes rotateConfetti {
+  0% { transform: rotate(-10deg) scale(1); }
+  100% { transform: rotate(10deg) scale(1.1); }
+}
+
+.modal-content h2 {
+  font-size: 2.5rem;
+  margin-bottom: 10px;
+  color: #111;
+  font-weight: 800;
+}
+
+.modal-content p {
+  font-size: 1.1rem;
+  color: #666;
+  margin-bottom: 25px;
+}
+
+.btn--modal-close {
+  background-image: linear-gradient(135deg, #74abe2 0%, #5563c1 100%);
+  color: white !important;
+  font-weight: 700;
+  padding: 14px 35px;
+  border: none;
+  box-shadow: 0 4px 15px rgba(85, 99, 193, 0.4);
+}
+
+.btn--modal-close:hover {
+  background-image: linear-gradient(135deg, #8bc2ff 0%, #6879e6 100%);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(85, 99, 193, 0.6);
 }
 
 /* Responsiveness */
