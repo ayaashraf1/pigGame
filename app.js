@@ -168,8 +168,21 @@ btnRoll.addEventListener('click', function () {
       
       updateLog(`💥 Oh no! Player ${activePlayer + 1} rolled a 1! Lost all ${transferScore} points to Player ${opponent + 1}!`, true);
       
-      // Move the round
-      switchPlayer();
+      // Check if transferring these points makes the opponent win (>= 100 points)
+      if (scores[opponent] >= 100) {
+        playing = false;
+        diceEl.classList.add('hidden');
+        
+        document.querySelector(`.player--${opponent}`).classList.add('player--winner');
+        document.querySelector(`.player--${opponent}`).classList.remove('player--active');
+        document.querySelector(`.player--${activePlayer}`).classList.remove('player--active');
+        
+        document.getElementById(`name--${opponent}`).textContent = `🏆 Player ${opponent + 1} Wins!`;
+        updateLog(`Game Over! 🎉 Player ${opponent + 1} won because Player ${activePlayer + 1} transferred points to them!`);
+      } else {
+        // Move the round
+        switchPlayer();
+      }
     }
   }, 400); // match CSS transition/animation time
 });
