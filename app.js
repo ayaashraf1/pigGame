@@ -31,6 +31,12 @@ const btnRoll = document.querySelector('.btn--roll');
 const btnHold = document.querySelector('.btn--hold');
 const gameLogEl = document.getElementById('game-log');
 
+// Modal Elements
+const winnerModalEl = document.getElementById('winner-modal');
+const modalTitleEl = document.getElementById('modal-title');
+const modalDescEl = document.getElementById('modal-desc');
+const btnCloseModal = document.getElementById('btn-close-modal');
+
 // Game state variables
 let scores, currentScore, activePlayer, playing;
 
@@ -69,7 +75,8 @@ const init = function () {
   player1El.classList.remove('player--active');
 
   diceEl.classList.add('hidden');
-  updateLog('Welcome to Pig Game! Player 1 starts resources.', false);
+  winnerModalEl.classList.add('hidden');
+  updateLog('Welcome to Pig Game! Player 1 starts.', false);
 };
 
 const switchPlayer = function () {
@@ -178,7 +185,14 @@ btnRoll.addEventListener('click', function () {
         document.querySelector(`.player--${activePlayer}`).classList.remove('player--active');
         
         document.getElementById(`name--${opponent}`).textContent = `🏆 Player ${opponent + 1} Wins!`;
-        updateLog(`Game Over! 🎉 Player ${opponent + 1} won because Player ${activePlayer + 1} transferred points to them!`);
+        
+        const winMsg = `Game Over! 🎉 Player ${opponent + 1} won because Player ${activePlayer + 1} transferred points to them!`;
+        updateLog(winMsg);
+
+        // Show Modal Popup
+        modalTitleEl.textContent = `🏆 Player ${opponent + 1} Wins!`;
+        modalDescEl.textContent = `Won the game with ${scores[opponent]} total points! Points transferred from Player ${activePlayer + 1}.`;
+        winnerModalEl.classList.remove('hidden');
       } else {
         // Move the round
         switchPlayer();
@@ -205,11 +219,26 @@ btnHold.addEventListener('click', function () {
     document.querySelector(`.player--${activePlayer}`).classList.remove('player--active');
     
     document.getElementById(`name--${activePlayer}`).textContent = `🏆 Player ${activePlayer + 1} Wins!`;
-    updateLog(`Game Over! 🎉 Player ${activePlayer + 1} won the game with ${scores[activePlayer]} points!`);
+    const winMsg = `Game Over! 🎉 Player ${activePlayer + 1} won the game with ${scores[activePlayer]} points!`;
+    updateLog(winMsg);
+
+    // Show Modal Popup
+    modalTitleEl.textContent = `🏆 Player ${activePlayer + 1} Wins!`;
+    modalDescEl.textContent = `Congratulations Player ${activePlayer + 1}! You won the game with ${scores[activePlayer]} total points.`;
+    winnerModalEl.classList.remove('hidden');
   } else {
     updateLog(`Player ${activePlayer + 1} holds. Added ${currentScore} to Total. Current Turn passes to Player ${activePlayer === 0 ? 2 : 1}.`);
     // 3. Switch to the next player
     switchPlayer();
+  }
+});
+
+// Close Modal event listeners (Both options: Button or Overlay click restarts)
+btnCloseModal.addEventListener('click', init);
+winnerModalEl.addEventListener('click', function(e) {
+  // If clicking outside content pane (the overlay)
+  if (e.target.classList.contains('modal-overlay')) {
+    init();
   }
 });
 
