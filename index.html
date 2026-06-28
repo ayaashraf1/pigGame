@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pig Game</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+  <main class="game-container">
+    <!-- Header Controls -->
+    <button class="btn btn--new">🔄 New Game</button>
+
+    <!-- Player 1 Section -->
+    <section class="player player--0 player--active">
+      <h2 class="name" id="name--0">Player 1</h2>
+      <p class="score" id="score--0">0</p>
+      <div class="current">
+        <p class="current-label">Turn Score</p>
+        <p class="current-score" id="current--0">0</p>
+      </div>
+    </section>
+
+    <!-- Player 2 Section -->
+    <section class="player player--1">
+      <h2 class="name" id="name--1">Player 2</h2>
+      <p class="score" id="score--1">0</p>
+      <div class="current">
+        <p class="current-label">Turn Score</p>
+        <p class="current-score" id="current--1">0</p>
+      </div>
+    </section>
+
+    <!-- Game Elements: Dice and Buttons -->
+    <div class="dice-container">
+      <div class="dice-shadow"></div>
+      <div class="dice hidden" id="dice-element">
+        <!-- 3D or styled dice faces can be managed here, but we will use CSS SVG-like dots for a beautiful look -->
+        <div class="dice__face" id="dice-face">
+          <!-- Dots will be dynamically injected by JS -->
+        </div>
+      </div>
+    </div>
+
+    <div class="control-buttons">
+      <button class="btn btn--roll">🎲 Roll Dice</button>
+      <button class="btn btn--hold">📥 Hold</button>
+    </div>
+
+    <!-- Notification panel for game messages -->
+    <div class="game-log" id="game-log">
+      Welcome to Pig Game! Roll the dice to start your turn.
+    </div>
+  </main>
+
+  <!-- Instructions Panel (Moved outside main game container to prevent vertical stretching) -->
+  <div class="instructions">
+    <h3>How to Play:</h3>
+    <ul>
+      <li>Roll the dice to accumulate points in your <strong>Turn Score</strong>.</li>
+      <li>You can roll as many times as you want to increase your score.</li>
+      <li>Click <strong>Hold</strong> to save your turn score to your <strong>Total Score</strong> and pass the turn to the other player.</li>
+      <li><strong>Warning:</strong> If you roll a <strong>1</strong>, your current Turn Score is lost (set to 0), added directly to your opponent's Total Score, and turn passes immediately!</li>
+      <li>The first player to reach <strong>100</strong> total points wins the game!</li>
+    </ul>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
